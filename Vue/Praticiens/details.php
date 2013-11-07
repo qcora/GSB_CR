@@ -6,21 +6,9 @@ require 'Vue/_Commun/navigation.php';
 ?>
 
 <div class="container">
-    <h2 class="text-center"><?= $this->nettoyer($praticien['nomPraticien']) ?></h2>
+    <h2 class="text-center"><?= $this->nettoyer($praticien['nomPraticien']) . ' ' .$this->nettoyer($praticien['prenomPraticien']) ?></h2>
     <div class="well">
         <form class="form-horizontal" role="form">
-            <div class="form-group">
-                <label class="col-sm-3 control-label">Nom</label>
-                <div class="col-sm-9">
-                    <p class="form-control-static"><?= $this->nettoyer($praticien['nomPraticien']) ?></p>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label">Prenom</label>
-                <div class="col-sm-9">
-                    <p class="form-control-static"><?= $this->nettoyer($praticien['prenomPraticien']) ?></p>
-                </div>
-            </div>
             <div class="form-group">
                 <label class="col-sm-3 control-label">Adresse</label>
                 <div class="col-sm-9">
