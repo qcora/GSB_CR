@@ -65,7 +65,7 @@ class ControleurPraticiens extends Controleur {
         $this->genererVue(array('praticien' => $praticien), "details");
     }
     
-    // Affiche les détails sur un praticien
+    // Affiche les détails sur un type de praticien
     private function afficherType($idTypePraticien) {
         $praticiens = $this->praticien->getTypesPraticiens($idTypePraticien);
         $this->genererVue(array('praticiens' => $praticiens), "index");
