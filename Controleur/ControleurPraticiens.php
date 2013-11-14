@@ -35,7 +35,7 @@ class ControleurPraticiens extends Controleur {
     // Affiche l'interface de recherche de praticien
     public function recherche() {
         $praticiens = $this->praticien->getPraticiens();
-        $typePraticiens = $this->typePraticien->getTypePraticiens();
+        $typePraticiens = $this->typePraticien->getTypePraticien();
         $this->genererVue(array('praticiens' => $praticiens, 'types' => $typePraticiens));
     }
 
@@ -67,7 +67,7 @@ class ControleurPraticiens extends Controleur {
     
     // Affiche les détails sur un praticien
     private function afficherType($idTypePraticien) {
-        $praticiens = $this->praticien->getTypePraticien($idTypePraticien);
+        $praticiens = $this->praticien->getTypesPraticiens($idTypePraticien);
         $this->genererVue(array('praticiens' => $praticiens), "index");
     }
 
