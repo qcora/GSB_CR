@@ -1,6 +1,12 @@
 <?php $this->titre = "Connexion" ?>
 
 <div class="container">
+    <?php if (isset($msgErreur)): ?>
+        <div class="alert alert-danger alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <strong>Erreur !</strong> <?= $msgErreur ?></div>
+    <?php endif; ?>
+
     <h2 class="text-center">Connexion à GSB-CR</h2>
     <div class="well">
         <form class="form-signin form-horizontal" role="form" action="connexion/connecter" method="post">
@@ -24,7 +30,3 @@
     </div>
 
 </div>
-
-<?php if (isset($msgErreur)): ?>
-    <p><?= $msgErreur ?></p>
-<?php endif; ?>
