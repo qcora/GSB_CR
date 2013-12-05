@@ -10,15 +10,26 @@ class ControleurComptesrendus extends ControleurSecurise {
 
     // Objet modèle Praticien
     private $praticiens;
-    private $compterendu;
+    private $compteRendu;
 
     public function __construct() {
         $this->praticiens = new Praticien();
-        $this->compterendu = new ComptesRendus();
+        $this->compteRendu = new ComptesRendus();
     }
 
-    // Affiche la liste des praticiens
+    // Affiche la liste des comptes rendus
     public function index() {
+        $comptesRendus = $this->compteRendu->getComptesRendus();
+        $msgErreur = "Vous n'avez saisi aucun compte-rendu de visite.";
+        
+        if ($comptesRendus->rowCount() < 1)
+            $this->genererVue(array('msgErreur' => $msgErreur));
+        else
+            $this->genererVue(array('comptesRendus' => $comptesRendus));
+    }
+    
+    // Page d'ajout de compte rendu
+    public function ajout() {
         $praticiens = $this->praticiens->getPraticiens();
         $this->genererVue(array('praticiens' => $praticiens));
     }
@@ -30,10 +41,39 @@ class ControleurComptesrendus extends ControleurSecurise {
         $dateRapport = $this->requete->getParametre("date");
         $motif = $this->requete->getParametre("motif");
         $bilan = $this->requete->getParametre("bilan");
-        $this->compterendu->ajouterCompteRendu($idPraticien, $idVisiteur, $dateRapport, $motif, $bilan);
+        $this->compteRendu->ajouterCompteRendu($idPraticien, $idVisiteur, $dateRapport, $motif, $bilan);
         
-        // Exécution de l'action par défaut pour réafficher la liste des billets
+        // Exécution de l'action par défaut 
         $this->genererVue();
         
+    }
+    
+            // Modifie un compte rendu
+    public function modifier() {
+        $idRapport = $this->requete->getParametre("idCR");
+        $motif = $this->requete->getParametre("motif");
+        $bilan = $this->requete->getParametre("bilan");
+        $this->compteRendu->modifierCompteRendu($motif, $bilan, $idRapport);  
+
+        $this->genererVue();
+    }
+    
+    
+        // Page modification d'un compte rendu
+    public function modification() {
+        
+        $idRapport = $this->requete->getParametre("id");
+        
+        $compteRendu = $this->compteRendu->getCompteRendu("$idRapport");
+        $this->genererVue(array('compteRendu' => $compteRendu));
+
+    }
+    
+        // Supprime un compte rendu
+    public function supprimer() {
+        $idRapport = $this->requete->getParametre("id");
+        
+        $this->compteRendu->supprimerCompteRendu($idRapport); 
+        $this->rediriger("comptesrendus");
     }
 }
