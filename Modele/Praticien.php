@@ -26,13 +26,15 @@ class Praticien extends Modele {
     }
     
     // Renvoie le type des praticiens à partir de leurs identifiants
-    public function getTypesPraticiens($idTypePraticien) {
-        $sql = $this->sqlPraticien . ' where TP.id_type_praticien=? order by nomPraticien';
-        $typePraticiens = $this->executerRequete($sql, array($idTypePraticien));
+    public function getTypesPraticiens($idTypePraticien, $nomPraticien=null, $villePraticien=null) {
+        $nomPraticien='%'.$nomPraticien.'%';
+        $villePraticien='%'.$villePraticien.'%';
+        $sql = $this->sqlPraticien . ' where TP.id_type_praticien=? and nom_praticien like ? and ville_praticien like ? order by p.nom_praticien';
+        $typePraticiens = $this->executerRequete($sql, array($idTypePraticien, $nomPraticien, $villePraticien));
         if ($typePraticiens->rowCount() != 0)
             return $typePraticiens;
         else
-            throw new Exception("Aucun praticien ne correspond à l'identifiant '$idTypePraticien'");
+            throw new Exception("Aucun praticien ne correspond à la recherche");
     }
 
 }

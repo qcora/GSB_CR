@@ -40,9 +40,21 @@ require 'Vue/_Commun/navigation.php';
             <div class="tab-pane fade" id="avancee">
                 <form class="form-horizontal" role="form" action="praticiens/resultats" method="post">
                     <div class="form-group">
+                        <label class="col-sm-3 col-sm-offset-2 control-label">Nom</label>
+                        <div class="col-sm-5 col-md-4">
+                            <input name="nom" type="text" class="form-control" autofocus>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 col-sm-offset-2 control-label">Ville</label>
+                        <div class="col-sm-5 col-md-4">
+                            <input name="ville" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="col-sm-3 col-sm-offset-2 control-label">Type</label>
                         <div class="col-sm-5 col-md-4">
-                            <select class="form-control" name="idType">
+                            <select class="form-control" name="idTypePraticien">
                                 <?php foreach ($types as $type) : ?>
                                     <option value="<?= $this->nettoyer($type['idTypePraticien']) ?>"><?= $this->nettoyer($type['libTypePraticien'])?></option>
                                 <?php endforeach; ?>
